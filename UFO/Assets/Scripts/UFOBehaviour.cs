@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UFOBehaviour : MonoBehaviour
 {
-
     #region MOVEMENT
     public const float ACCELERATION = 1; //the object would get full speed after 1 second
     public const float SPEED = 10.0f; //the speed of object is 20*deltaTime;
@@ -61,6 +60,28 @@ public class UFOBehaviour : MonoBehaviour
     }
     #endregion
 
+    #region FIRING MECHANIC
+    public GameObject bullet;
+    private void Fire()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Instantiate(bullet, this.transform.position, Quaternion.identity);
+        }
+    }
+    #endregion
+
+    #region COLLISION
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            Destroy(this.gameObject);
+            Application.Quit();
+        }
+    }
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +93,7 @@ public class UFOBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Fire();
         GetInput();
         Move();
     }
