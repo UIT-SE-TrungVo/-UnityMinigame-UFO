@@ -21,16 +21,14 @@ public class PickupBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.tag);
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Ponk !");
             CreateNewPickup();
             Destroy(this.gameObject);
         }
     }
 
-    void CreateNewPickup()
+    public void CreateNewPickup()
     {
         float x_ViewPort = Random.Range(0.02f, 0.98f);
         float y_ViewPort = Random.Range(0.02f, 0.98f);
